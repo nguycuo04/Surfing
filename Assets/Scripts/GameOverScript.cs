@@ -32,7 +32,7 @@ public class GameOverScript : MonoBehaviour
             restartTheGameButton.SetActive(true); 
         }
 
-        if ( player.transform.rotation.eulerAngles.z > 70 && player.transform.rotation.eulerAngles.z < 290)
+        if ( player.transform.rotation.eulerAngles.z > 80 && player.transform.rotation.eulerAngles.z < 280)
         {
             gameOver = true;
             Debug.Log("Game Over");
