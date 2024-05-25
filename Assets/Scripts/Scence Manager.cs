@@ -27,10 +27,14 @@ public class ScenceManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void NextLevel ()
+    public void NextLevel2 ()
     {
         SceneManager.LoadScene(1);
     }
-  
-    
+    public void NextLevel3()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+
 }

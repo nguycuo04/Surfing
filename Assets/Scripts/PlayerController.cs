@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject waveEffect;
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private GameObject nextLevelButton;
+    [SerializeField] private GameObject nexLevelCongrats;
+    [SerializeField] private GameObject nextLevelEffect;
     [SerializeField] private Vector3 previousPos;
     [SerializeField] private Camera camPlayer;
     [SerializeField] public  bool isOnSurface = false;
@@ -124,11 +126,13 @@ public class PlayerController : MonoBehaviour
            
         }
 
-        if (other.tag == "Island")
+        if (other.tag == "Island" && gameOverScript.gameOver == false)
         {
             
             moveNextLevel = true;
-            nextLevelButton.SetActive(true); 
+            nextLevelButton.SetActive(true);
+            nexLevelCongrats.SetActive(true);
+            nextLevelEffect.SetActive(true);
         }
 
     }
