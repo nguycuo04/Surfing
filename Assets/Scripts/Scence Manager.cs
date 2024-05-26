@@ -35,6 +35,11 @@ public class ScenceManager : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    public void NextLevel4()
+    {
+        SceneManager.LoadScene(3);
+    }
+
 
 
 }

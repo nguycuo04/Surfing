@@ -9,6 +9,8 @@ TagManager:
   - Rocket
   - Ice
   - Island
+  - Pirateship
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Water
   - UI
   - Shark
-  - 
-  - 
-  - 
+  - Pirateship
+  - Ice
+  - Monster
   - 
   - 
   - 

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 197188285677944680}
   - component: {fileID: 7682921968558506888}
-  - component: {fileID: 8236597397550201967}
   - component: {fileID: 407601881248244030}
+  - component: {fileID: 8346856083371219751}
   m_Layer: 0
   m_Name: Pirate Ship
   m_TagString: Untagged
@@ -87,8 +87,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8236597397550201967
-BoxCollider2D:
+--- !u!114 &407601881248244030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325076912175681078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97071b22f82aa9469b893fa58e62976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocket: {fileID: 298390829292108091, guid: dc4f6be838d8ce446a54d7ee0a476b32, type: 3}
+  startDelay: 1
+  intervalDelay: 4
+  xOutOfBound: -10
+  gameOverScript: {fileID: 0}
+--- !u!70 &8346856083371219751
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,35 +136,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18372512, y: -0.6430366}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.63255, y: 2.0604033}
-  m_EdgeRadius: 0
---- !u!114 &407601881248244030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325076912175681078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b97071b22f82aa9469b893fa58e62976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rocket: {fileID: 298390829292108091, guid: dc4f6be838d8ce446a54d7ee0a476b32, type: 3}
-  startDelay: 1
-  intervalDelay: 4
-  xOutOfBound: -10
+  m_Offset: {x: 0.077218875, y: -1.2245263}
+  m_Size: {x: 5.1544423, y: 2.5068624}
+  m_Direction: 1
 --- !u!1001 &6465051377980424491
 PrefabInstance:
   m_ObjectHideFlags: 0

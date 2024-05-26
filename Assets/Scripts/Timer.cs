@@ -40,7 +40,7 @@ public class Timer : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
         timeRemaining.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
 
-        if (time.Seconds == 56.0f)
+        if (time.Seconds == 57.0f)
         {
             StopFirstMessage();
         }
