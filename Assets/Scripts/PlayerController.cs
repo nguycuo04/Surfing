@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CoinLogic coinAddMore;
     [SerializeField] private GameOverScript gameOverScript;
     [SerializeField] public  bool moveNextLevel = false;
+    //[SerializeField] private float rotationSpeedOnAir = 2.0f;
+    
     
 
     // Start is called before the first frame update
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         startGame = true;
         coinAddMore = GameObject.Find("Game Manager").GetComponent<CoinLogic>();
         gameOverScript = GameObject.Find("Game Manager").GetComponent<GameOverScript>();
+       
 
     }
 
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
             MoveRight();
             MoveCamera();
 
-            if (Input.GetKeyDown(KeyCode.Space) && isOnSurface == true)
+            if (Input.GetMouseButton(0) && isOnSurface == true)
             {
                 rb.AddForce(Vector2.up * speed * addForce, ForceMode2D.Impulse);
                 //spriteRotate.DORotate(transform.rotation.eulerAngles + new Vector3(0, 0, 360), rotateDuration, RotateMode.FastBeyond360);
@@ -68,15 +71,15 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            if (Input.GetMouseButtonDown(0) && isOnSurface == false)
-            {
-                //float turn = Input.GetAxis("Horizontal"); 
-                rb.AddTorque(rotationSpeed * torqueForce, ForceMode2D.Force);
-            }
+            //if (Input.GetMouseButtonDown(0) && isOnSurface == false)
+            //{
+            //    //float turn = Input.GetAxis("Horizontal"); 
+            //    rb.AddTorque(rotationSpeed * torqueForce*Time.deltaTime, ForceMode2D.Force);
+            //}
 
         }
-       
-       
+
+        //RotateOnAir();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -99,6 +102,13 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime); 
     }
+
+    //void RotateOnAir()
+    //{
+    //    float rotationInput = Input.GetAxis("Vertical");
+    //    float rotation = rotationInput * rotationSpeedOnAir * Time.deltaTime;
+    //    transform.Rotate(0, 0, rotation);
+    //}
     void MoveCamera()
     {
         Vector3 offset = transform.position - previousPos;
@@ -117,7 +127,7 @@ public class PlayerController : MonoBehaviour
             coinAddMore.CoinAdd();
         }
 
-        if (other.tag == "Rocket")
+        if (other.tag == "Rocket" || other.tag =="Atomicboom")
         {
             soudEffects.PlayOneShot(rocketFireSound);
             explosionEffect.SetActive(true);

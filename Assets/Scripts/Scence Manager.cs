@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenceManager : MonoBehaviour
 {
-   
+    private int levelIndex=0; 
     //[SerializeField] private PlayerController playerController;
    
     // Start is called before the first frame update
