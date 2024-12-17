@@ -12,6 +12,10 @@ TagManager:
   - Pirateship
   - Monster
   - Atomicboom
+  - BoidCenter
+  - Lake
+  - +2
+  - +4
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - Pirateship
   - Ice
   - Monster
-  - 
+  - Obstacles
   - 
   - 
   - 

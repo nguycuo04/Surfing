@@ -5,24 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenceManager : MonoBehaviour
 {
-    private int levelIndex=0; 
-    //[SerializeField] private PlayerController playerController;
-   
-    // Start is called before the first frame update
-    void Start()
-    {
-       // playerController = GameObject.Find(" Player").GetComponent<PlayerController>();
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (playerController.moveNextLevel == true)
-        //{
-          //  Level2();
-        //}
-    }
+ 
     public void StartTheGameLevel1()
     {
         SceneManager.LoadScene(0);
@@ -39,7 +22,5 @@ public class ScenceManager : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
-
-
 
 }

@@ -466,7 +466,6 @@ MonoBehaviour:
   rocket: {fileID: 2218025356049499252, guid: d7cebccc05644244fa09070bb396d36b, type: 3}
   startDelay: 1
   intervalDelay: 2
-  xOutOfBound: -10
   gameOverScript: {fileID: 0}
 --- !u!1 &211954874
 GameObject:
@@ -1717,7 +1716,7 @@ PrefabInstance:
     - target: {fileID: 3058987047438588507, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7201021dc9b45d1489642e8147d68d64, type: 3}
+      objectReference: {fileID: 21300000, guid: 94abb9965febe494591695c96a86bf89, type: 3}
     - target: {fileID: 5371141962062047976, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1811,7 +1810,8 @@ PrefabInstance:
       value: -17.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1803502654990278306, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
@@ -2506,9 +2506,10 @@ PrefabInstance:
     - target: {fileID: 8568685822142530523, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7201021dc9b45d1489642e8147d68d64, type: 3}
+      objectReference: {fileID: 21300000, guid: 46ee00a3640988c4ea3c911520ccef1b, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5337013788960085697, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}

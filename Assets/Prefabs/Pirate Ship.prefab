@@ -94,7 +94,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325076912175681078}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b97071b22f82aa9469b893fa58e62976, type: 3}
   m_Name: 
@@ -102,7 +102,6 @@ MonoBehaviour:
   rocket: {fileID: 298390829292108091, guid: dc4f6be838d8ce446a54d7ee0a476b32, type: 3}
   startDelay: 1
   intervalDelay: 4
-  xOutOfBound: -10
   gameOverScript: {fileID: 0}
 --- !u!70 &8346856083371219751
 CapsuleCollider2D:

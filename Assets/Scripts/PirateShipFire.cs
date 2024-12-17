@@ -7,8 +7,8 @@ public class PirateShipFire : MonoBehaviour
 {
     [SerializeField] private GameObject rocket;
     [SerializeField ] private float startDelay =1.0f;
-    [SerializeField] private float intervalDelay = 2.0f;
-    [SerializeField] private float xOutOfBound = -10.0f;
+    [SerializeField] private float intervalDelay = 7.0f;
+    //[SerializeField] private float xOutOfBound = -10.0f;
     [SerializeField] private GameOverScript gameOverScript; 
 
     // Start is called before the first frame update
@@ -17,12 +17,6 @@ public class PirateShipFire : MonoBehaviour
         InvokeRepeating("FireTheBoat", startDelay, intervalDelay);
         gameOverScript = GameObject.Find("Game Manager").GetComponent<GameOverScript>();
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 
     void FireTheBoat()

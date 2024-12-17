@@ -11,10 +11,9 @@ using UnityEngine.AdaptivePerformance.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D rb;
-    [SerializeField] private float speed = 3.0f;
+    private float speed = 6.0f;
     [SerializeField] private float addForce = 1.0f;
     //[SerializeField] private Transform spriteRotate;
-    [SerializeField] private float rotateDuration = 0.5f;
     [SerializeField] private GameObject waveEffect;
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private GameObject nextLevelButton;
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 previousPos;
     [SerializeField] private Camera camPlayer;
     [SerializeField] public  bool isOnSurface = false;
-    [SerializeField] private float rotationSpeed = 1.0f;
+    //[SerializeField] private float rotationSpeed = 1.0f;
     [SerializeField] private float torqueForce;
     [SerializeField] public  bool eatCoin = false;
     [SerializeField] public bool rocketDestroy = false; 
@@ -36,9 +35,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CoinLogic coinAddMore;
     [SerializeField] private GameOverScript gameOverScript;
     [SerializeField] public  bool moveNextLevel = false;
-    //[SerializeField] private float rotationSpeedOnAir = 2.0f;
-    
-    
+    [SerializeField] AdManagerBanner adManagerBanner;
+    [SerializeField] AdManagerInterstitial interstitialAd;
+    [SerializeField] private bool runAd = false;
+    [SerializeField] private GameObject twoPoint;
+    [SerializeField] private GameObject fourPoint;
+    [SerializeField] private float activeDuration = 2f; // Duration to stay active
+
+    private bool isCurrentlyActive = false; // Flag to check if the object is active
 
     // Start is called before the first frame update
     void Awake()
@@ -49,8 +53,15 @@ public class PlayerController : MonoBehaviour
         startGame = true;
         coinAddMore = GameObject.Find("Game Manager").GetComponent<CoinLogic>();
         gameOverScript = GameObject.Find("Game Manager").GetComponent<GameOverScript>();
+        adManagerBanner = GameObject.Find("Ad Manager").GetComponent<AdManagerBanner>();
+        interstitialAd = GameObject.Find("Ad Manager").GetComponent<AdManagerInterstitial>();
+        adManagerBanner.LoadAd();
        
-
+    }
+    private void Start()
+    {
+        speed = 6.0f;
+       
     }
 
     // Update is called once per frame
@@ -64,32 +75,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(0) && isOnSurface == true)
             {
                 rb.AddForce(Vector2.up * speed * addForce, ForceMode2D.Impulse);
-                //spriteRotate.DORotate(transform.rotation.eulerAngles + new Vector3(0, 0, 360), rotateDuration, RotateMode.FastBeyond360);
-                //spriteRotate.DORotate(transform.rotation.eulerAngles + new Vector3(0, 0, 0), rotateDuration, RotateMode.FastBeyond360);
                 isOnSurface = false;
-
-
             }
-
-            //if (Input.GetMouseButtonDown(0) && isOnSurface == false)
-            //{
-            //    //float turn = Input.GetAxis("Horizontal"); 
-            //    rb.AddTorque(rotationSpeed * torqueForce*Time.deltaTime, ForceMode2D.Force);
-            //}
 
         }
 
-        //RotateOnAir();
+        if (runAd == false && moveNextLevel ==true)
+        {
+            StartCoroutine(TimeDelayAd());
+            runAd = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        
             waveEffect.SetActive(true);
             isOnSurface = true;
             soudEffects.PlayOneShot(waterCrash);
-        
 
         if (gameObject.CompareTag("Ice"))
         {
@@ -103,12 +106,6 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * speed * Time.deltaTime); 
     }
 
-    //void RotateOnAir()
-    //{
-    //    float rotationInput = Input.GetAxis("Vertical");
-    //    float rotation = rotationInput * rotationSpeedOnAir * Time.deltaTime;
-    //    transform.Rotate(0, 0, rotation);
-    //}
     void MoveCamera()
     {
         Vector3 offset = transform.position - previousPos;
@@ -119,22 +116,40 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        soudEffects.PlayOneShot(coinSound);
         if (other.tag== "Coin")
         {
-            soudEffects.PlayOneShot(coinSound);
             eatCoin = true;
             Destroy(other.gameObject);
-            coinAddMore.CoinAdd();
+            coinAddMore.CoinAdd(1);
         }
 
-        if (other.tag == "Rocket" || other.tag =="Atomicboom")
+        if (other.tag == "+2")
         {
-            soudEffects.PlayOneShot(rocketFireSound);
-            explosionEffect.SetActive(true);
-            rocketDestroy = true;
-            Destroy(other.gameObject);
-           
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(2);
+            twoPoint.SetActive(true);
+            ActivateObject(twoPoint);
+            
         }
+
+        if (other.tag == "+4")
+        {
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(4);
+            ActivateObject(fourPoint);
+        }
+
+        //if (other.tag == "Rocket" || other.tag =="Atomicboom")
+        //{
+        //    soudEffects.PlayOneShot(rocketFireSound);
+        //    explosionEffect.SetActive(true);
+        //    rocketDestroy = true;
+        //    Destroy(other.gameObject);
+
+        //}
 
         if (other.tag == "Island" && gameOverScript.gameOver == false)
         {
@@ -144,9 +159,37 @@ public class PlayerController : MonoBehaviour
             nexLevelCongrats.SetActive(true);
             nextLevelEffect.SetActive(true);
         }
-
+        if (other.tag == "Lake")
+        {
+            speed = 0;
+            
+        }
     }
 
+    private void ActivateObject(GameObject targetObject)
+    {
+        isCurrentlyActive = true; // Set the flag to true
+        targetObject.SetActive(true); // Activate the object
 
-  
+        // Deactivate the object after the specified duration
+        Invoke(nameof(ResetFlagAndDeactivate), activeDuration);
+        StartCoroutine(DeactivateObjectAfterTime(targetObject, activeDuration));
+    }
+
+    private IEnumerator DeactivateObjectAfterTime(GameObject targetObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        targetObject.SetActive(false); // Deactivate the object
+    }
+
+    private void ResetFlagAndDeactivate()
+    {
+        isCurrentlyActive = false; // Reset the flag to allow reactivation
+    }
+    IEnumerator TimeDelayAd()
+    {
+        yield return new WaitForSeconds(0.5f);
+        interstitialAd.ShowInterstitialAd();
+    }
+
 }

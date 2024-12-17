@@ -12,7 +12,7 @@ public class CoinRotae : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 360, 0), rotateDuration, RotateMode.FastBeyond360)
+        transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 0, 360), rotateDuration, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo); ;
     }
 

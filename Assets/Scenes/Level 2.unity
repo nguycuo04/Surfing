@@ -840,7 +840,8 @@ PrefabInstance:
       value: Pirate Ship (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6745373103223535632, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
@@ -1157,6 +1158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog Effect
       objectReference: {fileID: 0}
+    - target: {fileID: 2498602857684698657, guid: 17288613d9caf6841b30b76e087de933, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7145066642723619211, guid: 17288613d9caf6841b30b76e087de933, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 250
@@ -1442,7 +1447,8 @@ PrefabInstance:
       value: -0.12413466
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6745373103223535632, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
@@ -1579,7 +1585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4373217111627289378, guid: 51bee2b452d99d04b8d53f91b923bd87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -153
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 4373217111627289378, guid: 51bee2b452d99d04b8d53f91b923bd87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1958,7 +1964,7 @@ PrefabInstance:
     - target: {fileID: 3058987047438588507, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7201021dc9b45d1489642e8147d68d64, type: 3}
+      objectReference: {fileID: 21300000, guid: 94abb9965febe494591695c96a86bf89, type: 3}
     - target: {fileID: 5371141962062047976, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2033,7 +2039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6927671763900384450, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50
+      value: -136
       objectReference: {fileID: 0}
     - target: {fileID: 6927671763900384450, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2056,7 +2062,8 @@ PrefabInstance:
       value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1803502654990278306, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3682b38ef02b3e4199cf03425f1fb2c, type: 3}
@@ -2474,7 +2481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688958166185256989, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 92
+      value: -78
       objectReference: {fileID: 0}
     - target: {fileID: 2688958166185256989, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2511,9 +2518,10 @@ PrefabInstance:
     - target: {fileID: 8568685822142530523, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7201021dc9b45d1489642e8147d68d64, type: 3}
+      objectReference: {fileID: 21300000, guid: 46ee00a3640988c4ea3c911520ccef1b, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5337013788960085697, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aa422fd8a565de4e92019fafbbd0867, type: 3}
@@ -2749,7 +2757,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.08, y: -0.3, z: 10}
-  m_LocalScale: {x: 1.1, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 0.6, y: 0.7, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1227213722}
@@ -2795,7 +2803,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e250d6590f0e90740a6c14dbc63e969c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86a4b8e93ff2e5f4ab471f1116af064a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3081,7 +3089,8 @@ PrefabInstance:
       value: Pirate Ship (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6745373103223535632, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
@@ -3833,7 +3842,8 @@ PrefabInstance:
       value: Pirate Ship (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6745373103223535632, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
@@ -4382,7 +4392,8 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6745373103223535632, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01371c522ebaa4c46b2db57f0f267115, type: 3}
