@@ -16,6 +16,16 @@ TagManager:
   - Lake
   - +2
   - +4
+  - +6
+  - +8
+  - +10
+  - -2
+  - -4
+  - -6
+  - chia2
+  - chia4
+  - nhan2
+  - nhan4
   layers:
   - Default
   - TransparentFX

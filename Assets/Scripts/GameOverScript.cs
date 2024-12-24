@@ -1,50 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameOverScript : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+  
     [SerializeField] public bool gameOver = false;
     [SerializeField] private Timer time;
     [SerializeField] private GameObject gameOverText;
     [SerializeField] private GameObject restartTheGameButton;
-    [SerializeField] private GameObject player; 
+    [SerializeField] private GameObject player;
+    [SerializeField] private CoinLogic coinLogic; 
 
-    // Start is called before the first frame update
+    private Vector3 screenMin;
+    private Vector3 screenMax;
+
     void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        time = GetComponent<Timer>();
-        //player = GameObject.Find ("Player").GetComponent<GameObject>();
        
+        coinLogic = GetComponent<CoinLogic>();
+        time = GetComponent<Timer>();
+
+        // Calculate screen bounds
+        CalculateScreenBounds();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerController.rocketDestroy == true)
+        // Game Over if time runs out
+        if (time != null && time.currentTime <= 0 && (coinLogic.CoinNumber < coinLogic.YourNumber))
         {
-            gameOver = true; 
-            Debug.Log ("Game Over");
-            gameOverText.SetActive(true);
-            restartTheGameButton.SetActive(true); 
+            TriggerGameOver("Time's up!");
         }
 
-        if ( player.transform.rotation.eulerAngles.z > 80 && player.transform.rotation.eulerAngles.z < 280)
+        // Game Over if the player is out of bounds
+        if (player != null && IsOutOfScreen(player.transform.position))
         {
-            gameOver = true;
-            Debug.Log("Game Over");
-            gameOverText.SetActive(true);
-            restartTheGameButton.SetActive(true);
-        }
-        if (time.currentTime <=0)
-        {
-            gameOver = true;
-            Debug.Log("Game Over");
-            gameOverText.SetActive(true);
-            restartTheGameButton.SetActive(true);
+            TriggerGameOver("Player is out of screen!");
         }
     }
+
+    void CalculateScreenBounds()
+    {
+        Vector3 screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        Vector3 screenTopRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+
+        screenMin = screenBottomLeft;
+        screenMax = screenTopRight;
+    }
+
+    bool IsOutOfScreen(Vector3 position)
+    {
+        return position.x < screenMin.x || position.x > screenMax.x ||
+               position.y < screenMin.y || position.y > screenMax.y;
+    }
+
+    void TriggerGameOver(string reason)
+    {
+        if (!gameOver) // Ensure Game Over logic is triggered only once
+        {
+            gameOver = true;
+            Debug.Log($"Game Over: {reason}");
+            if (gameOverText != null) gameOverText.SetActive(true);
+            if (restartTheGameButton != null) restartTheGameButton.SetActive(true);
+            ResetTimer();
+        }
+    }
+
+    void ResetTimer()
+    {
+        time.currentTime = time.currentMin * 60; 
+    }
+    
+
 }

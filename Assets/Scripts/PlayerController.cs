@@ -11,7 +11,7 @@ using UnityEngine.AdaptivePerformance.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D rb;
-    private float speed = 6.0f;
+    [SerializeField] private float speed = 0.5f;
     [SerializeField] private float addForce = 1.0f;
     //[SerializeField] private Transform spriteRotate;
     [SerializeField] private GameObject waveEffect;
@@ -31,36 +31,36 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip rocketFireSound;
     [SerializeField] private AudioClip iceHit;
     [SerializeField] private AudioSource soudEffects;
-    [SerializeField] public bool startGame = false;
+    //[SerializeField] public bool startGame = false;
     [SerializeField] private CoinLogic coinAddMore;
     [SerializeField] private GameOverScript gameOverScript;
     [SerializeField] public  bool moveNextLevel = false;
-    [SerializeField] AdManagerBanner adManagerBanner;
-    [SerializeField] AdManagerInterstitial interstitialAd;
     [SerializeField] private bool runAd = false;
     [SerializeField] private GameObject twoPoint;
     [SerializeField] private GameObject fourPoint;
+    [SerializeField] private GameObject sixPoint;
+    [SerializeField] private GameObject eightPoint;
+    [SerializeField] private GameObject tenPoint;
+    [SerializeField] private GameObject minusTwoPoint;
+    [SerializeField] private GameObject minusFourPoint;
+    [SerializeField] private GameObject minusSixPoint;
+    [SerializeField] private GameObject multiplyTwoPoint;
+    [SerializeField] private GameObject divideTwoPoint;
+    [SerializeField] private GameObject multiplyFourPoint;
+    [SerializeField] private GameObject divideFourPoint;
     [SerializeField] private float activeDuration = 2f; // Duration to stay active
-
     private bool isCurrentlyActive = false; // Flag to check if the object is active
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        transform.position = new Vector3(-5, 0, 0);
         soudEffects = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         transform.position = previousPos;
-        startGame = true;
         coinAddMore = GameObject.Find("Game Manager").GetComponent<CoinLogic>();
         gameOverScript = GameObject.Find("Game Manager").GetComponent<GameOverScript>();
-        adManagerBanner = GameObject.Find("Ad Manager").GetComponent<AdManagerBanner>();
-        interstitialAd = GameObject.Find("Ad Manager").GetComponent<AdManagerInterstitial>();
-        adManagerBanner.LoadAd();
-       
-    }
-    private void Start()
-    {
-        speed = 6.0f;
        
     }
 
@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour
     {
         if (gameOverScript.gameOver == false)
         {
-            MoveRight();
-            MoveCamera();
+            //MoveRight();
+            //MoveCamera();
 
             if (Input.GetMouseButton(0) && isOnSurface == true)
             {
@@ -101,10 +101,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void MoveRight()
-    {
-        transform.Translate(Vector3.right * speed * Time.deltaTime); 
-    }
+    //void MoveRight()
+    //{
+    //    transform.Translate(Vector3.right * speed * Time.deltaTime); 
+    //}
 
     void MoveCamera()
     {
@@ -116,9 +116,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        soudEffects.PlayOneShot(coinSound);
+        
         if (other.tag== "Coin")
         {
+            soudEffects.PlayOneShot(coinSound);
             eatCoin = true;
             Destroy(other.gameObject);
             coinAddMore.CoinAdd(1);
@@ -126,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "+2")
         {
+            soudEffects.PlayOneShot(coinSound);
             eatCoin = true;
             other.gameObject.SetActive(false);
             coinAddMore.CoinAdd(2);
@@ -136,11 +138,95 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "+4")
         {
+            soudEffects.PlayOneShot(coinSound);
             eatCoin = true;
             other.gameObject.SetActive(false);
             coinAddMore.CoinAdd(4);
             ActivateObject(fourPoint);
         }
+        if (other.tag == "+6")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(6);
+            ActivateObject(sixPoint);
+        }
+        if (other.tag == "+8")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(8);
+            ActivateObject(eightPoint);
+        }
+        if (other.tag == "+10")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(10);
+            ActivateObject(tenPoint);
+        }
+        if (other.tag == "-2")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(-2);
+            ActivateObject(minusTwoPoint);
+        }
+        if (other.tag == "-4")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(-4);
+            ActivateObject(minusFourPoint);
+        }
+        if (other.tag == "-6")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.CoinAdd(-6);
+            ActivateObject(minusSixPoint);
+        }
+
+        if (other.tag == "nhan2")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.MultiplyScore(2);
+            ActivateObject(multiplyTwoPoint);
+        }
+        if (other.tag == "nhan4")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.MultiplyScore(4);
+            ActivateObject(multiplyFourPoint);
+        }
+
+        if (other.tag == "chia2")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.DivideScore(2);
+            ActivateObject(divideTwoPoint);
+        }
+        if (other.tag == "chia4")
+        {
+            soudEffects.PlayOneShot(coinSound);
+            eatCoin = true;
+            other.gameObject.SetActive(false);
+            coinAddMore.MultiplyScore(4);
+            ActivateObject(divideFourPoint);
+        }
+
 
         //if (other.tag == "Rocket" || other.tag =="Atomicboom")
         //{
@@ -189,7 +275,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator TimeDelayAd()
     {
         yield return new WaitForSeconds(0.5f);
-        interstitialAd.ShowInterstitialAd();
     }
 
 }

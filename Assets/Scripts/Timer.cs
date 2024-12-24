@@ -7,25 +7,20 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     [SerializeField] public  float currentTime;
-    [SerializeField] private int currentMin;
+    [SerializeField] public int currentMin;
     [SerializeField] private TextMeshProUGUI timeRemaining;
-    [SerializeField] private bool timerIsActive = false;
+    [SerializeField] public bool timerIsActive = false;
     [SerializeField] private  PlayerController playerController;
-    [SerializeField] private GameOverScript gameOverScript;
-    [SerializeField] private GameObject firstMessage; 
-    // Start is called before the first frame update
     void Start()
     {
         currentTime = currentMin * 60;
         timerIsActive = true;
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        gameOverScript = GetComponent<GameOverScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerController.startGame == true && gameOverScript.gameOver == false && timerIsActive == true)
+        if (timerIsActive == true)
         {
             
             currentTime -= Time.deltaTime;
@@ -39,22 +34,12 @@ public class Timer : MonoBehaviour
        
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
         timeRemaining.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
-
-        if (time.Seconds == 57.0f)
-        {
-            StopFirstMessage();
-        }
-
     }
 
     public void StartTimer()
     {
         timerIsActive = true;
+        currentTime = currentMin * 60;
 
-    }
-
-    void StopFirstMessage()
-    {
-            firstMessage.SetActive(false);
     }
 }

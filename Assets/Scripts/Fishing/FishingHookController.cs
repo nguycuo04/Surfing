@@ -70,7 +70,7 @@ public class FishingHookController : MonoBehaviour
         direction = offset.normalized;
     }
 
-    private void StartMovingOut()
+    public void StartMovingOut()
     {
         isSwinging = false;
         isMovingOut = true;
