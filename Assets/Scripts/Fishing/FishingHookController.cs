@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FishingHookController : MonoBehaviour
@@ -41,7 +42,7 @@ public class FishingHookController : MonoBehaviour
         if (isSwinging)
         {
             SwingHook();
-            if (Input.GetKeyDown(KeyCode.Space)) // Start moving the hook when pressing Space
+            if (Input.GetMouseButton(0)) // Start moving the hook when pressing Space
             {
                 StartMovingOut();
             }

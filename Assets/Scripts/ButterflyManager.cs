@@ -38,42 +38,53 @@ public class ButterflyManager : MonoBehaviour
 
     void SpawnButterflies()
     {
-        for (int i = 0; i < numberOfButterflies; i++)
+        int spawnedCount = 0;
+
+        while (spawnedCount < numberOfButterflies)
         {
-            Vector2 spawnPosition;
-
-            // Attempt to find a valid spawn position
-            int attempts = 0;
-            do
+            foreach (GameObject prefab in butterflyPrefabs)
             {
-                spawnPosition = new Vector2(
-                    Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2),
-                    Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2)
-                ) + areaCenter;
+                if (spawnedCount >= numberOfButterflies)
+                    break; // Stop if we reach the desired count
 
-                attempts++;
-                if (attempts > 50) // Prevent infinite loops
+                Vector2 spawnPosition;
+
+                // Attempt to find a valid spawn position
+                int attempts = 0;
+                do
                 {
-                    Debug.LogWarning("Could not find a non-overlapping position for butterfly.");
-                    break;
+                    spawnPosition = new Vector2(
+                        Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2),
+                        Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2)
+                    ) + areaCenter;
+
+                    attempts++;
+                    if (attempts > 50) // Prevent infinite loops
+                    {
+                        Debug.LogWarning("Could not find a non-overlapping position for butterfly.");
+                        break;
+                    }
+                } while (IsOverlapping(spawnPosition));
+
+                // Instantiate the prefab
+                GameObject butterfly = Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+                // Add to the list and ensure it has the ButterflyBoid component
+                ButterflyBoid boid = butterfly.GetComponent<ButterflyBoid>();
+                if (boid != null)
+                {
+                    butterflies.Add(boid);
                 }
-            } while (IsOverlapping(spawnPosition));
+                else
+                {
+                    Debug.LogWarning($"Prefab {prefab.name} is missing the ButterflyBoid component.");
+                }
 
-            // Randomly select a prefab from the array
-            GameObject randomPrefab = butterflyPrefabs[Random.Range(0, butterflyPrefabs.Length)];
-            GameObject butterfly = Instantiate(randomPrefab, spawnPosition, Quaternion.identity);
-
-            ButterflyBoid boid = butterfly.GetComponent<ButterflyBoid>();
-            if (boid != null)
-            {
-                butterflies.Add(boid);
-            }
-            else
-            {
-                Debug.LogWarning("One of the butterfly prefabs is missing the ButterflyBoid component.");
+                spawnedCount++;
             }
         }
     }
+
 
     bool IsOverlapping(Vector2 position)
     {

@@ -29,7 +29,8 @@ public class CoinLogic : MonoBehaviour
         currentHighScore = GetHighScore();
         UpdateHighScoreText(); 
         gameOverScript = GetComponent<GameOverScript>();
-        yourNumber = Random.Range(currentHighScore, currentHighScore + 8);
+        //yourNumber = Random.Range(currentHighScore, currentHighScore + 8);
+        YourRandomNumber();
         yourNumberText.text = "Target: " + yourNumber.ToString();
         banner = GameObject.Find("AdManager").GetComponent<AdManagerBanner>();
         interstitial = GameObject.Find("AdManager").GetComponent<AdManagerInterstitial>();
@@ -46,6 +47,15 @@ public class CoinLogic : MonoBehaviour
         }
     }
 
+    void YourRandomNumber()
+    {
+        if(currentHighScore <10)
+        {
+            yourNumber = Random.Range(10, 16);
+        }
+        else
+            yourNumber = Random.Range(currentHighScore, currentHighScore + 6);
+    }
     IEnumerator TimeDelayAd()
     {
         yield return new WaitForSeconds(0.5f);
@@ -53,7 +63,7 @@ public class CoinLogic : MonoBehaviour
     }
     void NextLevelControl()
     {
-        if (coinNumber> yourNumber)
+        if (coinNumber> yourNumber || coinNumber == yourNumber)
         {
             nextLevel = true;
             nextButton.SetActive(true); 
